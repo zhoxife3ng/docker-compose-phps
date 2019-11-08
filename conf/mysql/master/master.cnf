@@ -1,0 +1,45 @@
+[mysqld]
+server_id = 1
+
+character-set-server=utf8
+collation-server=utf8_general_ci
+default-storage-engine=INNODB
+
+#Optimize omit
+
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+
+log-bin     = /var/lib/mysql/binlog
+log_bin_trust_function_creators=1
+binlog_format = ROW
+expire_logs_days = 99
+sync_binlog = 0
+
+slow-query-log=1
+slow-query-log-file=/var/log/mysql/slow-queries.log
+long_query_time = 3
+log-queries-not-using-indexes
+
+
+max_allowed_packet=1073741824
+
+# 缓存数据和索引大小 1.5g
+innodb_buffer_pool_size=1610612736
+
+# 设置 redo 日志（重做日志）的大小 512m
+innodb_log_file_size=536870912
+
+# 最大连接数
+max_connections=1000
+
+# 为每个表使用一个单独的.ibd文件
+innodb_file_per_table=1
+
+# 完全支持ACID特性，每次将改变刷新到 redo 日志
+innodb_flush_log_at_trx_commit=1
+
+# 设置缓存还没有提交的事务的缓冲区的大小 8m
+innodb_log_buffer_size=8388608
+
+# 查询缓存 3m
+# query_cache_size=3145728
